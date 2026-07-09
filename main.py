@@ -53,6 +53,7 @@ async def analyze(file: UploadFile = File(...)):
     print("Whisper completed.")
 
     transcript = result["text"]
+    print(transcript)
 
     print("Calling Groq...")
     analysis = evaluate_pronunciation(transcript)
