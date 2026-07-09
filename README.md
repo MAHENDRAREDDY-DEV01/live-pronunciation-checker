@@ -1,1 +1,3 @@
+<<<<<<< HEAD
 # live-pronunciation-checkerr
+=======
