@@ -20,7 +20,7 @@ app.add_middleware(
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-model = whisper.load_model("tiny")
+model = whisper.load_model("tiny.en")
 def get_audio_duration(filepath):
     result = subprocess.run(
         [
@@ -53,7 +53,7 @@ async def analyze(file: UploadFile = File(...)):
     print("Whisper completed.")
 
     transcript = result["text"]
-    print(transcript)
+    print("Transcript: ",transcript)
 
     print("Calling Groq...")
     analysis = evaluate_pronunciation(transcript)
