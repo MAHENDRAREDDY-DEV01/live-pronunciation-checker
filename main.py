@@ -37,7 +37,6 @@ def get_audio_duration(filepath):
     data = json.loads(result.stdout)
     return float(data["format"]["duration"])
 
-
 @app.post("/analyze")
 async def analyze(file: UploadFile = File(...)):
     filepath = os.path.join(UPLOAD_DIR, file.filename)
@@ -45,25 +44,19 @@ async def analyze(file: UploadFile = File(...)):
     with open(filepath, "wb") as f:
         f.write(await file.read())
 
-    try:
-        duration = get_audio_duration(filepath)
-    except Exception as e:
-        raise HTTPException(
-            status_code=400,
-            detail=str(e)
-        )
+    duration = get_audio_duration(filepath)
 
-    if duration < 30 or duration > 45:
-        os.remove(filepath)
-        raise HTTPException(
-            status_code=400,
-            detail="Audio must be between 30 and 45 seconds."
-        )
-    # duration = 30
+    print("File uploaded:", filepath)
 
+    print("Starting Whisper...")
     result = model.transcribe(filepath, language="en")
+    print("Whisper completed.")
+
     transcript = result["text"]
+
+    print("Calling Groq...")
     analysis = evaluate_pronunciation(transcript)
+    print("Groq completed.")
 
     return {
         "duration": round(duration, 2),
