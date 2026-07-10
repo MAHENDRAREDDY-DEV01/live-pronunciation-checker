@@ -49,13 +49,14 @@ async def analyze(file: UploadFile = File(...)):
     print("File uploaded:", filepath)
     print("Duration: ", duration)
 
-    print("Starting Whisper...")
+    print("Before transcibe...")
     result = model.transcribe(
         filepath,
         language="en",
-        fp16=False
+        fp16=False,
+        verbose=True
     )
-    print("Whisper completed.")
+    print("After Transcibe")
 
     transcript = result["text"]
     print("Transcript: ",transcript)
