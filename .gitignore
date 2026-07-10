@@ -1,5 +1,7 @@
-.env
+node_modules/
 venv/
+.env
 __pycache__/
 *.pyc
-uploads/
+dist/
+build/

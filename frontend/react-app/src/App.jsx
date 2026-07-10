@@ -21,7 +21,7 @@ function App() {
 
     try {
       const res = await axios.post(
-        "https://live-pronunciation-checkerr-production.up.railway.app/analyze",
+        "http://127.0.0.1:8000/analyze",
         formData
       );
       console.log(res.data);
