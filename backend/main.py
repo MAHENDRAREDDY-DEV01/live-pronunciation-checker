@@ -47,6 +47,7 @@ async def analyze(file: UploadFile = File(...)):
     duration = get_audio_duration(filepath)
 
     print("File uploaded:", filepath)
+    print("Duration: ", duration)
 
     print("Starting Whisper...")
     result = model.transcribe(
